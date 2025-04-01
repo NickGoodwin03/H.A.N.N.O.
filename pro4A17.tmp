@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkh2a8s0ie5bs"]
+
+[ext_resource type="Script" path="res://prop.gd" id="1_v4mko"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qi3by"]
+albedo_color = Color(0.173545, 0.0866327, 0.0225882, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_66ihv"]
+material = SubResource("StandardMaterial3D_qi3by")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_phwtd"]
+
+[node name="Prop" type="RigidBody3D"]
+mass = 0.121
+script = ExtResource("1_v4mko")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_66ihv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_phwtd")
