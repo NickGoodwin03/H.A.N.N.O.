@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://c2gifq5n2btha"]
+
+[ext_resource type="Script" path="res://computer.gd" id="1_n3den"]
+[ext_resource type="PackedScene" uid="uid://dvppr7brrsdi2" path="res://computer_ui.tscn" id="2_gp4b7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g1lw7"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_bcbjq"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8dl7b"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dvwsr"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_8dl7b")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nkcpt"]
+size = Vector3(1, 1, 0.0161743)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ik3xr"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Computer" type="StaticBody3D" groups=["Interactable"]]
+process_mode = 3
+script = ExtResource("1_n3den")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+gui_embed_subwindows = true
+
+[node name="ComputerUI" parent="SubViewport" instance=ExtResource("2_gp4b7")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_g1lw7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_bcbjq")
+surface_material_override/0 = SubResource("StandardMaterial3D_dvwsr")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+input_capture_on_drag = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0022192)
+shape = SubResource("BoxShape3D_nkcpt")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0134091, -0.00194639, 0.503411)
+visible = false
+texture = SubResource("ViewportTexture_ik3xr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.014716, 1.51401)

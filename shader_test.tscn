@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://ilcnm8giw18q"]
+
+[ext_resource type="PackedScene" uid="uid://b3klif7f7rbmd" path="res://world.tscn" id="1_ge8ec"]
+[ext_resource type="Shader" path="res://shaders/shader_test.gdshader" id="1_otppm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qnm86"]
+shader = ExtResource("1_otppm")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 12
+shader_parameter/dither_size = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+material = SubResource("ShaderMaterial_qnm86")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+physics_object_picking = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="World" parent="SubViewport" instance=ExtResource("1_ge8ec")]

@@ -1,16 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://nmls8awhdwso"]
 
 [ext_resource type="Script" path="res://prop_char.gd" id="1_w0w3r"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_w6raq"]
+[ext_resource type="ArrayMesh" uid="uid://dx252axk6g053" path="res://models/cardboard_mesh1.res" id="2_pdrej"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gwl5q"]
+size = Vector3(1.97244, 1.23322, 1.98212)
 
 [node name="PropChar" type="CharacterBody3D"]
 script = ExtResource("1_w0w3r")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_w6raq")
+mesh = ExtResource("2_pdrej")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0153046, -0.384125, 0.00375366)
 shape = SubResource("BoxShape3D_gwl5q")

@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://wgpj6i0ne37a"]
+
+[ext_resource type="Script" path="res://computer.gd" id="1_s6rei"]
+[ext_resource type="PackedScene" uid="uid://dvppr7brrsdi2" path="res://computer_ui.tscn" id="2_i8pee"]
+[ext_resource type="Script" path="res://interaction_component.gd" id="3_3dnyk"]
+[ext_resource type="Script" path="res://ComputerComponent.gd" id="4_mqanq"]
+[ext_resource type="Texture2D" uid="uid://cftbgtve38uld" path="res://Keyboard & Mouse/Default/keyboard_e_outline.png" id="5_yf6kx"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5vsgv"]
+size = Vector2(3, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6ecps"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhyd6"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_6ecps")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8d5xp"]
+size = Vector3(3, 2, 0.1)
+
+[node name="New Computer" type="Node3D"]
+process_mode = 3
+script = ExtResource("1_s6rei")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+gui_embed_subwindows = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="ComputerUI" parent="SubViewport" instance=ExtResource("2_i8pee")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_5vsgv")
+surface_material_override/0 = SubResource("StandardMaterial3D_qhyd6")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+collision_layer = 3
+input_capture_on_drag = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("BoxShape3D_8d5xp")
+
+[node name="ComputerCamera" type="Camera3D" parent="MeshInstance3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.65008)
+
+[node name="InteractionComponent" type="Node" parent="MeshInstance3D/Area3D" node_paths=PackedStringArray("mesh")]
+script = ExtResource("3_3dnyk")
+mesh = NodePath("../..")
+context = "Use Computer"
+override_icon = true
+new_icon = ExtResource("5_yf6kx")
+
+[node name="ComputerComponent" type="Node" parent="MeshInstance3D/Area3D" node_paths=PackedStringArray("camera")]
+script = ExtResource("4_mqanq")
+camera = NodePath("../ComputerCamera")

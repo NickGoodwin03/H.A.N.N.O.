@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvppr7brrsdi2"]
+
+[ext_resource type="Script" path="res://computer_ui.gd" id="1_i3tfb"]
+
+[node name="ComputerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_i3tfb")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="TabContainer" type="TabContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 54.0
+grow_horizontal = 2
+current_tab = 0
+
+[node name="Navigation" type="PanelContainer" parent="Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Communication" type="PanelContainer" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="News" type="PanelContainer" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Missions" type="PanelContainer" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
